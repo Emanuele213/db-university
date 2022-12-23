@@ -13,7 +13,7 @@ GROUP BY `teachers`.`office_address`;
 
 3)Calcolare la media dei voti di ogni appello d'esame
 
-SELECT AVG(`exam_student`.`vote`)
+SELECT ROUND(AVG(`exam_student`.`vote`))
 FROM `exam_student` 
 GROUP BY `exam_student`.`exam_id` ASC;
 
@@ -33,7 +33,7 @@ JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id`
 WHERE `degrees`.`name` = 'Corso di Laurea in Economia';
 
 2)Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
-SELECT `degrees`.`name`, `departments`.`name` AS 'NOME DIPARTIMENTO'
+SELECT `degrees`.`name`,`degrees`.`level`, `departments`.`name` AS 'NOME DIPARTIMENTO'
 FROM `degrees` 
 JOIN `departments` ON `degrees`.`department_id` = `departments`.`id` 
 WHERE `level` = 'magistrale' AND `departments`.`name` = 'Dipartimento di Neuroscienze';
@@ -51,7 +51,7 @@ SELECT `students`.`name`,`students`.`surname` , `degrees`.`name` AS 'CORSO DI LA
 FROM `students` 
 INNER JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id` 
 INNER JOIN `departments` ON `degrees`.`department_id` = `departments`.`id` 
-ORDER BY `students`.`surname` ASC;
+ORDER BY `students`.`name`, `students`.`surname` ASC;
 
 5)Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
 SELECT `degrees`.`name` AS 'CORSO DI LAUREA', `courses`.`name` AS 'CORSO', `teachers`.`name` AS 'NOME INSEGNANTE', `teachers`.`surname` AS 'COGNOME INSEGNANTE' 
